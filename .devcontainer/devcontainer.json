@@ -1,0 +1,25 @@
+{
+  "name": "Solar Advisor",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.11" }
+  },
+  "postCreateCommand": "pip install -r backend/requirements.txt && cd frontend && npm install && npm run build",
+  "postStartCommand": "bash .devcontainer/start-app.sh",
+  "forwardPorts": [5000],
+  "portsAttributes": {
+    "5000": {
+      "label": "Solar Advisor",
+      "visibility": "public",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python", "dbaeumer.vscode-eslint", "bradlc.vscode-tailwindcss"],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      }
+    }
+  }
+}
