@@ -1,15 +1,28 @@
-const BASE = '/api';
+import { clearToken, getToken } from './session';
 
-function token() {
-  return localStorage.getItem('sa_token') || '';
-}
+const BASE = '/api';
 
 export async function api(path, options = {}) {
   const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
-  if (token()) headers.Authorization = `Bearer ${token()}`;
+  const token = getToken();
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+    // Some embedded proxies strip the Authorization header; this is a fallback.
+    headers['X-Auth-Token'] = token;
+  }
+
   const res = await fetch(`${BASE}${path}`, { ...options, headers });
+
   let data = null;
   try { data = await res.json(); } catch { data = null; }
+
+  if (res.status === 401 && token) {
+    // The server rejected a token we believed was valid (expired or signed with
+    // a different secret). Drop it and let the app return to the login screen.
+    clearToken();
+    window.dispatchEvent(new CustomEvent('sa:unauthorized'));
+  }
+
   if (!res.ok) {
     const err = new Error((data && data.error) || `Request failed (${res.status})`);
     err.status = res.status;

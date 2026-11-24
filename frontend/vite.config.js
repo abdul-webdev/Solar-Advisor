@@ -12,6 +12,8 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:5000',
         changeOrigin: true,
+        // keep cookies working when the preview/proxy strips custom headers
+        cookieDomainRewrite: '',
       },
     },
   },

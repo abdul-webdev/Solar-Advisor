@@ -35,9 +35,23 @@ def verify_token(token):
         return None
 
 
-def current_user():
+TOKEN_COOKIE = "sa_token"
+
+
+def request_token():
+    """Read the session token from the Authorization header, the X-Auth-Token
+    fallback header, or the session cookie (used when a proxy strips headers)."""
     auth = request.headers.get("Authorization", "")
     token = auth.replace("Bearer ", "").strip()
+    if not token:
+        token = (request.headers.get("X-Auth-Token") or "").strip()
+    if not token:
+        token = (request.cookies.get(TOKEN_COOKIE) or "").strip()
+    return token
+
+
+def current_user():
+    token = request_token()
     if not token:
         return None
     payload = verify_token(token)

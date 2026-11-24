@@ -153,6 +153,7 @@ user answers. Approximate values are labelled as estimates throughout the UI.
 | Method | Endpoint | Access |
 | --- | --- | --- |
 | POST | `/api/auth/register`, `/api/auth/login` | public |
+| POST | `/api/auth/logout` | public (clears the session cookie) |
 | GET/PATCH | `/api/auth/me` | authenticated |
 | POST | `/api/chat` | user + admin |
 | GET/DELETE | `/api/chat/history` | authenticated (own data) |
@@ -165,7 +166,9 @@ user answers. Approximate values are labelled as estimates throughout the UI.
 | PATCH/DELETE | `/api/admin/users/:id`, `/api/admin/settings` | admin only |
 | GET | `/api/health` | public |
 
-**Security:** passwords are hashed with Werkzeug PBKDF2; sessions use HMAC-SHA256 signed tokens;
+**Security:** passwords are hashed with Werkzeug PBKDF2; sessions use HMAC-SHA256 signed tokens
+(sent both as a `Bearer` token and an `HttpOnly` session cookie, so the session survives
+proxies or embedded previews that strip custom headers or block Web Storage);
 `require_admin` returns HTTP 403 server-side for every general-user request to an admin endpoint,
 regardless of what the UI shows. Users can only read and delete their own recommendations
 (the query is scoped by `user_id`), and cannot change their own role or delete their own account.

@@ -7,7 +7,8 @@ from datetime import datetime, timezone
 from flask import Blueprint, g, jsonify, request
 from werkzeug.security import generate_password_hash
 
-from app.auth import check_credentials, current_user, make_token, require_admin, require_auth
+from app.auth import (TOKEN_COOKIE, check_credentials, current_user, make_token,
+                      require_admin, require_auth)
 from app.database import get_db, get_settings, set_setting
 from app.expert_system import calculations, explanation, inference_engine, knowledge_base, nlp
 
@@ -16,6 +17,19 @@ bp = Blueprint("api", __name__)
 
 def _row_to_dict(row):
     return dict(row) if row else None
+
+
+def _auth_response(user, status=200):
+    """Issue a token in the body AND as an HttpOnly-free session cookie.
+
+    The cookie is the fallback path for embedded/proxied environments that drop
+    custom headers; the body token is what the SPA normally uses.
+    """
+    token = make_token(user)
+    resp = jsonify({"token": token, "user": _public_user(user)})
+    resp.status_code = status
+    resp.set_cookie(TOKEN_COOKIE, token, httponly=True, samesite="Lax", max_age=60 * 60 * 24 * 7, path="/")
+    return resp
 
 
 def _public_user(u):
@@ -51,8 +65,7 @@ def register():
     conn.commit()
     row = conn.execute("SELECT * FROM users WHERE id = ?", (cur.lastrowid,)).fetchone()
     conn.close()
-    user = dict(row)
-    return jsonify({"token": make_token(user), "user": _public_user(user)}), 201
+    return _auth_response(dict(row), status=201)
 
 
 @bp.post("/auth/login")
@@ -67,7 +80,14 @@ def login():
     conn.execute("UPDATE users SET last_active = datetime('now') WHERE id = ?", (user["id"],))
     conn.commit()
     conn.close()
-    return jsonify({"token": make_token(user), "user": _public_user(user)})
+    return _auth_response(user)
+
+
+@bp.post("/auth/logout")
+def logout():
+    resp = jsonify({"ok": True})
+    resp.delete_cookie(TOKEN_COOKIE, path="/")
+    return resp
 
 
 @bp.get("/auth/me")
