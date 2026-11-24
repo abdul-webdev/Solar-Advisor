@@ -26,3 +26,6 @@ Thumbs.db
 # Env
 .env
 .env.local
+
+# Static demo build output (produced by CI)
+demo/dist/
