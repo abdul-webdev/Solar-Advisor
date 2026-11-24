@@ -1,0 +1,586 @@
+{
+ "appliances": [
+  {
+   "name": "Air conditioner",
+   "category": "cooling",
+   "wattage_w": 1500.0,
+   "typical_hours_per_day": 6.0,
+   "is_essential": 0
+  },
+  {
+   "name": "Ceiling fan",
+   "category": "cooling",
+   "wattage_w": 75.0,
+   "typical_hours_per_day": 12.0,
+   "is_essential": 1
+  },
+  {
+   "name": "Clothes dryer",
+   "category": "laundry",
+   "wattage_w": 2500.0,
+   "typical_hours_per_day": 1.0,
+   "is_essential": 0
+  },
+  {
+   "name": "Computer",
+   "category": "electronics",
+   "wattage_w": 200.0,
+   "typical_hours_per_day": 6.0,
+   "is_essential": 1
+  },
+  {
+   "name": "Electric iron",
+   "category": "laundry",
+   "wattage_w": 1000.0,
+   "typical_hours_per_day": 0.5,
+   "is_essential": 0
+  },
+  {
+   "name": "Electric kettle",
+   "category": "kitchen",
+   "wattage_w": 1500.0,
+   "typical_hours_per_day": 0.5,
+   "is_essential": 0
+  },
+  {
+   "name": "Electric oven",
+   "category": "kitchen",
+   "wattage_w": 2000.0,
+   "typical_hours_per_day": 1.0,
+   "is_essential": 0
+  },
+  {
+   "name": "Fan (standing)",
+   "category": "cooling",
+   "wattage_w": 60.0,
+   "typical_hours_per_day": 10.0,
+   "is_essential": 1
+  },
+  {
+   "name": "Freezer",
+   "category": "kitchen",
+   "wattage_w": 250.0,
+   "typical_hours_per_day": 12.0,
+   "is_essential": 1
+  },
+  {
+   "name": "Hair dryer",
+   "category": "personal",
+   "wattage_w": 1200.0,
+   "typical_hours_per_day": 0.25,
+   "is_essential": 0
+  },
+  {
+   "name": "LED light",
+   "category": "lighting",
+   "wattage_w": 9.0,
+   "typical_hours_per_day": 8.0,
+   "is_essential": 1
+  },
+  {
+   "name": "LED television",
+   "category": "entertainment",
+   "wattage_w": 100.0,
+   "typical_hours_per_day": 4.0,
+   "is_essential": 1
+  },
+  {
+   "name": "Lighting (general)",
+   "category": "lighting",
+   "wattage_w": 15.0,
+   "typical_hours_per_day": 8.0,
+   "is_essential": 1
+  },
+  {
+   "name": "Microwave oven",
+   "category": "kitchen",
+   "wattage_w": 1200.0,
+   "typical_hours_per_day": 0.5,
+   "is_essential": 0
+  },
+  {
+   "name": "Refrigerator",
+   "category": "kitchen",
+   "wattage_w": 200.0,
+   "typical_hours_per_day": 12.0,
+   "is_essential": 1
+  },
+  {
+   "name": "Rice cooker",
+   "category": "kitchen",
+   "wattage_w": 700.0,
+   "typical_hours_per_day": 1.0,
+   "is_essential": 0
+  },
+  {
+   "name": "Router / Wi-Fi",
+   "category": "electronics",
+   "wattage_w": 20.0,
+   "typical_hours_per_day": 24.0,
+   "is_essential": 1
+  },
+  {
+   "name": "Washing machine",
+   "category": "laundry",
+   "wattage_w": 1440.0,
+   "typical_hours_per_day": 1.0,
+   "is_essential": 0
+  },
+  {
+   "name": "Water heater",
+   "category": "utility",
+   "wattage_w": 2000.0,
+   "typical_hours_per_day": 1.0,
+   "is_essential": 0
+  },
+  {
+   "name": "Water pump",
+   "category": "utility",
+   "wattage_w": 750.0,
+   "typical_hours_per_day": 1.0,
+   "is_essential": 1
+  }
+ ],
+ "panels": [
+  {
+   "manufacturer": "LONGi Solar",
+   "model": "Hi-MO 6 LR5-72HTH",
+   "wattage_w": 550.0,
+   "efficiency_pct": 21.5,
+   "max_power_voltage_v": 41.95
+  },
+  {
+   "manufacturer": "JA Solar",
+   "model": "JAM72D30 550W",
+   "wattage_w": 550.0,
+   "efficiency_pct": 21.3,
+   "max_power_voltage_v": 41.6
+  },
+  {
+   "manufacturer": "Canadian Solar",
+   "model": "HiKu6 CS6R-550MS",
+   "wattage_w": 550.0,
+   "efficiency_pct": 21.1,
+   "max_power_voltage_v": 41.9
+  },
+  {
+   "manufacturer": "Trina Solar",
+   "model": "Vertex S+ TSM-NEG9R.28",
+   "wattage_w": 450.0,
+   "efficiency_pct": 22.0,
+   "max_power_voltage_v": 41.2
+  },
+  {
+   "manufacturer": "SunPower",
+   "model": "Maxeon 3 400W",
+   "wattage_w": 400.0,
+   "efficiency_pct": 22.8,
+   "max_power_voltage_v": 65.8
+  }
+ ],
+ "inverters": [
+  {
+   "manufacturer": "Growatt",
+   "model": "SPF 1000ES",
+   "capacity_kw": 1.0,
+   "dc_voltage_v": 24.0,
+   "ac_voltage_v": 230.0,
+   "surge_kw": 2.0,
+   "efficiency_pct": 93.0
+  },
+  {
+   "manufacturer": "Growatt",
+   "model": "SPF 1500ES",
+   "capacity_kw": 1.5,
+   "dc_voltage_v": 24.0,
+   "ac_voltage_v": 230.0,
+   "surge_kw": 3.0,
+   "efficiency_pct": 93.0
+  },
+  {
+   "manufacturer": "Deye",
+   "model": "SUN-2K-SG05LP1",
+   "capacity_kw": 2.0,
+   "dc_voltage_v": 48.0,
+   "ac_voltage_v": 230.0,
+   "surge_kw": 4.0,
+   "efficiency_pct": 97.0
+  },
+  {
+   "manufacturer": "Growatt",
+   "model": "SPF 3000ES",
+   "capacity_kw": 3.0,
+   "dc_voltage_v": 48.0,
+   "ac_voltage_v": 230.0,
+   "surge_kw": 6.0,
+   "efficiency_pct": 93.0
+  },
+  {
+   "manufacturer": "Deye",
+   "model": "SUN-5K-SG05LP1",
+   "capacity_kw": 5.0,
+   "dc_voltage_v": 48.0,
+   "ac_voltage_v": 230.0,
+   "surge_kw": 10.0,
+   "efficiency_pct": 97.0
+  },
+  {
+   "manufacturer": "Growatt",
+   "model": "SPF 7500ES",
+   "capacity_kw": 7.5,
+   "dc_voltage_v": 48.0,
+   "ac_voltage_v": 230.0,
+   "surge_kw": 15.0,
+   "efficiency_pct": 93.0
+  },
+  {
+   "manufacturer": "Victron Energy",
+   "model": "MultiPlus 10kVA",
+   "capacity_kw": 10.0,
+   "dc_voltage_v": 48.0,
+   "ac_voltage_v": 230.0,
+   "surge_kw": 20.0,
+   "efficiency_pct": 94.0
+  }
+ ],
+ "batteries": [
+  {
+   "manufacturer": "Generic",
+   "model": "12V 100Ah AGM",
+   "technology": "Sealed lead-acid (AGM)",
+   "nominal_voltage_v": 12.8,
+   "capacity_ah": 100.0,
+   "depth_of_discharge_pct": 50.0,
+   "efficiency_pct": 85.0,
+   "cycle_life": 1200
+  },
+  {
+   "manufacturer": "Generic",
+   "model": "24V 100Ah LiFePO4",
+   "technology": "Lithium iron phosphate (LiFePO4)",
+   "nominal_voltage_v": 25.6,
+   "capacity_ah": 100.0,
+   "depth_of_discharge_pct": 80.0,
+   "efficiency_pct": 95.0,
+   "cycle_life": 6000
+  },
+  {
+   "manufacturer": "Growatt",
+   "model": "ARK-5.1L",
+   "technology": "Lithium iron phosphate (LiFePO4)",
+   "nominal_voltage_v": 51.2,
+   "capacity_ah": 100.0,
+   "depth_of_discharge_pct": 80.0,
+   "efficiency_pct": 95.0,
+   "cycle_life": 6000
+  },
+  {
+   "manufacturer": "Pylontech",
+   "model": "US3000C",
+   "technology": "Lithium iron phosphate (LiFePO4)",
+   "nominal_voltage_v": 51.2,
+   "capacity_ah": 150.0,
+   "depth_of_discharge_pct": 80.0,
+   "efficiency_pct": 95.0,
+   "cycle_life": 6000
+  },
+  {
+   "manufacturer": "Pylontech",
+   "model": "US2000C",
+   "technology": "Lithium iron phosphate (LiFePO4)",
+   "nominal_voltage_v": 51.2,
+   "capacity_ah": 200.0,
+   "depth_of_discharge_pct": 80.0,
+   "efficiency_pct": 95.0,
+   "cycle_life": 6000
+  },
+  {
+   "manufacturer": "EVE Energy",
+   "model": "LF280K \u00b7 16S storage bank",
+   "technology": "Lithium iron phosphate (LiFePO4)",
+   "nominal_voltage_v": 51.2,
+   "capacity_ah": 280.0,
+   "depth_of_discharge_pct": 80.0,
+   "efficiency_pct": 95.0,
+   "cycle_life": 6000
+  }
+ ],
+ "rules": [
+  {
+   "rule_code": "WARN-009",
+   "name": "Missing backup target warning",
+   "category": "design",
+   "priority": 5,
+   "condition_field": "backup_hours_target",
+   "operator": "eq",
+   "threshold_value": 0.0,
+   "threshold_value2": null,
+   "action_type": "warn",
+   "action_value": "ask_user",
+   "description": "IF backup duration is missing THEN ask the user instead of guessing.",
+   "explanation_template": "Backup duration not provided \u2014 clarification required.",
+   "is_active": 1
+  },
+  {
+   "rule_code": "NLP-001",
+   "name": "Requirements extracted",
+   "category": "extraction",
+   "priority": 10,
+   "condition_field": "appliance_count",
+   "operator": "gte",
+   "threshold_value": 1.0,
+   "threshold_value2": null,
+   "action_type": "note",
+   "action_value": "facts_ready",
+   "description": "At least one appliance was extracted from the user's description.",
+   "explanation_template": "Extracted {appliance_count} appliance categories.",
+   "is_active": 1
+  },
+  {
+   "rule_code": "INV-001",
+   "name": "Small-load inverter band",
+   "category": "inverter",
+   "priority": 20,
+   "condition_field": "total_load_w",
+   "operator": "lt",
+   "threshold_value": 1000.0,
+   "threshold_value2": null,
+   "action_type": "recommend_inverter",
+   "action_value": "1 kVA to 1.5 kVA",
+   "description": "IF total load is below 1000 W THEN consider a 1-1.5 kVA inverter.",
+   "explanation_template": "Connected load {total_load_w} W is in the small-load band.",
+   "is_active": 1
+  },
+  {
+   "rule_code": "INV-003",
+   "name": "Large-load inverter band",
+   "category": "inverter",
+   "priority": 25,
+   "condition_field": "total_load_w",
+   "operator": "gte",
+   "threshold_value": 3000.0,
+   "threshold_value2": null,
+   "action_type": "recommend_inverter",
+   "action_value": "5 kVA+",
+   "description": "IF total load is 3000 W or more THEN consider a 5 kVA or larger inverter and review load shedding.",
+   "explanation_template": "Large connected load {total_load_w} W \u2014 review essential-load strategy.",
+   "is_active": 1
+  },
+  {
+   "rule_code": "INV-002",
+   "name": "Inverter continuous-load margin",
+   "category": "inverter",
+   "priority": 30,
+   "condition_field": "total_load_w",
+   "operator": "gte",
+   "threshold_value": 0.0,
+   "threshold_value2": null,
+   "action_type": "recommend_inverter",
+   "action_value": "load x 1.25",
+   "description": "IF total load is known THEN apply 25% safety margin and select the next standard inverter size.",
+   "explanation_template": "{total_load_w} W \u00d7 1.25 = {required_inverter_w} W \u2192 select {inverter_capacity_kw} kW inverter.",
+   "is_active": 1
+  },
+  {
+   "rule_code": "PV-004",
+   "name": "Solar array sizing",
+   "category": "solar",
+   "priority": 40,
+   "condition_field": "daily_energy_wh",
+   "operator": "gt",
+   "threshold_value": 0.0,
+   "threshold_value2": null,
+   "action_type": "recommend_pv",
+   "action_value": "daily/(PSH x PR)",
+   "description": "IF daily energy is known THEN PV capacity = daily energy / (peak sun hours \u00d7 performance ratio), plus reserve.",
+   "explanation_template": "{daily_energy_wh} Wh \u00f7 ({peak_sun_hours} PSH \u00d7 {pv_ratio}) = {pv_required_wp} Wp \u2192 {pv_capacity_wp} Wp array.",
+   "is_active": 1
+  },
+  {
+   "rule_code": "PV-006",
+   "name": "Round to whole modules",
+   "category": "solar",
+   "priority": 45,
+   "condition_field": "pv_required_wp",
+   "operator": "gt",
+   "threshold_value": 0.0,
+   "threshold_value2": null,
+   "action_type": "recommend_pv",
+   "action_value": "ceil to modules",
+   "description": "IF PV capacity is computed THEN round up to whole modules from the equipment database.",
+   "explanation_template": "{pv_required_wp} Wp target \u2192 {pv_panel_count} \u00d7 {pv_panel_wattage_w} W = {pv_capacity_wp} Wp.",
+   "is_active": 1
+  },
+  {
+   "rule_code": "BAT-003",
+   "name": "Usable battery capacity",
+   "category": "battery",
+   "priority": 50,
+   "condition_field": "backup_hours_target",
+   "operator": "gt",
+   "threshold_value": 0.0,
+   "threshold_value2": null,
+   "action_type": "recommend_battery",
+   "action_value": "essential x hours / (DoD x eff)",
+   "description": "IF backup hours are required THEN battery nominal energy = essential load \u00d7 hours / (DoD \u00d7 efficiency).",
+   "explanation_template": "{essential_load_w} W \u00d7 {backup_hours_target} h \u00f7 ({dod} \u00d7 {inv_eff}) = {battery_required_wh} Wh nominal.",
+   "is_active": 1
+  },
+  {
+   "rule_code": "BAT-007",
+   "name": "Long backup increases storage",
+   "category": "battery",
+   "priority": 55,
+   "condition_field": "backup_hours_target",
+   "operator": "gte",
+   "threshold_value": 8.0,
+   "threshold_value2": null,
+   "action_type": "recommend_battery",
+   "action_value": "larger bank",
+   "description": "IF required backup is 8 hours or more THEN prefer a larger standard battery bank for resilience.",
+   "explanation_template": "Backup target {backup_hours_target} h requires a larger storage bank.",
+   "is_active": 1
+  },
+  {
+   "rule_code": "SUR-005",
+   "name": "Start-surge compatibility check",
+   "category": "safety",
+   "priority": 60,
+   "condition_field": "has_motor_load",
+   "operator": "eq",
+   "threshold_value": 1.0,
+   "threshold_value2": null,
+   "action_type": "check_surge",
+   "action_value": "verify surge",
+   "description": "IF motor loads (fridge/pump/washer) are present THEN verify inverter surge rating covers start-up current.",
+   "explanation_template": "Motor loads present \u2014 verify inverter surge rating before installation.",
+   "is_active": 1
+  },
+  {
+   "rule_code": "ESS-008",
+   "name": "Essential-load backup strategy",
+   "category": "design",
+   "priority": 65,
+   "condition_field": "essential_load_w",
+   "operator": "gt",
+   "threshold_value": 0.0,
+   "threshold_value2": null,
+   "action_type": "note",
+   "action_value": "essential_only",
+   "description": "IF essential loads are identified THEN size backup on essential load and exclude heavy non-essential loads.",
+   "explanation_template": "Backup sized on essential load {essential_load_w} W; non-essential loads excluded during outages.",
+   "is_active": 1
+  }
+ ],
+ "facts": [
+  {
+   "fact_code": "KB-BACKUP-001",
+   "title": "Backup Duration Estimate",
+   "category": "Calculations",
+   "description": "Estimated backup hours = usable battery energy \u00f7 essential load. Connected load is not the same as average demand.",
+   "value_text": "Hours = usable Wh / essential W",
+   "source": "Engineering reference"
+  },
+  {
+   "fact_code": "KB-BAT-001",
+   "title": "Depth of Discharge",
+   "category": "Battery Technology",
+   "description": "Usable battery energy is limited by depth of discharge. Planning at 80% DoD protects cycle life for LiFePO4 chemistries.",
+   "value_text": "Default: 80%",
+   "source": "Battery datasheet"
+  },
+  {
+   "fact_code": "KB-BAT-012",
+   "title": "Lithium Iron Phosphate Battery",
+   "category": "Battery Technology",
+   "description": "LiFePO4 batteries provide high cycle life, good thermal stability and efficient energy storage.",
+   "value_text": "51.2 V nominal \u00b7 280 Ah \u00b7 80% DoD planning limit",
+   "source": "Manufacturer datasheet \u00b7 LF280K specification, revision C"
+  },
+  {
+   "fact_code": "KB-ENERGY-001",
+   "title": "Daily Energy Formula",
+   "category": "Calculations",
+   "description": "Daily energy = sum of (quantity \u00d7 wattage \u00d7 hours per day) for every appliance. All sizing flows from this figure.",
+   "value_text": "Wh/day",
+   "source": "Engineering reference"
+  },
+  {
+   "fact_code": "KB-ESS-001",
+   "title": "Essential vs Non-Essential Loads",
+   "category": "System Design",
+   "description": "Backup sizing should prioritise essential loads (lighting, fridge, fans, communications). Heavy heating/laundry loads are typically excluded during outages.",
+   "value_text": "Essential list defined in appliance table",
+   "source": "Expert consensus"
+  },
+  {
+   "fact_code": "KB-INSTALL-001",
+   "title": "Installation Disclaimer",
+   "category": "Safety",
+   "description": "This advisor provides preliminary educational sizing only. Final design requires site survey, verified nameplates, protection devices and local standards compliance.",
+   "value_text": "Not certified installation advice",
+   "source": "Regulatory note"
+  },
+  {
+   "fact_code": "KB-INV-001",
+   "title": "Inverter Safety Margin",
+   "category": "Inverter Sizing",
+   "description": "Continuous inverter capacity should exceed simultaneous load by a safety margin to cover motor starting and short-term peaks.",
+   "value_text": "Default margin: 25%",
+   "source": "Manufacturer sizing guide"
+  },
+  {
+   "fact_code": "KB-PANEL-001",
+   "title": "Module Rounding",
+   "category": "Solar Fundamentals",
+   "description": "PV capacity is rounded up to whole modules. Array wattage = panel count \u00d7 module wattage.",
+   "value_text": "Round up to next module",
+   "source": "Design practice"
+  },
+  {
+   "fact_code": "KB-PV-001",
+   "title": "Peak Sun Hours",
+   "category": "Solar Fundamentals",
+   "description": "Peak sun hours (PSH) convert solar irradiance into equivalent full-sun hours per day. A value of 4.0 PSH is a conservative educational default.",
+   "value_text": "Default: 4.0 hours/day",
+   "source": "PV sizing textbook, Ch. 3"
+  },
+  {
+   "fact_code": "KB-PV-002",
+   "title": "PV Performance Ratio",
+   "category": "Solar Fundamentals",
+   "description": "The performance ratio accounts for inverter, wiring, temperature and soiling losses between the array and the load.",
+   "value_text": "Default: 80%",
+   "source": "IEC 61853 guidance"
+  },
+  {
+   "fact_code": "KB-SUR-001",
+   "title": "Motor Starting Surge",
+   "category": "Safety",
+   "description": "Refrigerators, pumps and washing machines draw 3-5x running current at start-up. Verify inverter surge rating before installation.",
+   "value_text": "Check surge rating vs. motor loads",
+   "source": "Electrical safety note"
+  },
+  {
+   "fact_code": "KB-VOLT-001",
+   "title": "Battery Voltage Selection",
+   "category": "System Design",
+   "description": "48 V nominal systems (51.2 V LiFePO4) are preferred for loads above ~1 kW because they reduce DC current and cable losses.",
+   "value_text": "51.2 V for >1 kW loads",
+   "source": "System design guide"
+  }
+ ],
+ "settings": {
+  "peak_sun_hours": "4.0",
+  "pv_performance_ratio": "0.80",
+  "battery_dod": "0.80",
+  "inverter_efficiency": "0.90",
+  "inverter_safety_margin": "0.25",
+  "solar_array_reserve": "0.20",
+  "battery_voltage": "51.2",
+  "allow_registration": "true",
+  "knowledge_version": "v2.4",
+  "rules_version": "v1.8",
+  "nlp_version": "v1.6"
+ }
+}
