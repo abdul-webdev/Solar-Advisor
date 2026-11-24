@@ -1,0 +1,23 @@
+# One-service deployment: Flask serves the built React app and the REST API.
+# Render reads this file automatically when you connect the repo.
+services:
+  - type: web
+    name: solar-advisor
+    runtime: python
+    plan: free
+    branch: main
+    buildCommand: "./build.sh"
+    startCommand: "cd backend && gunicorn --config gunicorn.conf.py wsgi:app"
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      - key: SOLAR_SECRET
+        generateValue: true
+      # Persist the SQLite database on a mounted disk instead of the ephemeral FS.
+      - key: SOLAR_DB_PATH
+        value: /var/data/solar_advisor.db
+    disk:
+      name: solar-data
+      mountPath: /var/data
+      sizeGB: 1

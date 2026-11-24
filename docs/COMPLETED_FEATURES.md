@@ -58,8 +58,20 @@
 6. **Sizing is preliminary** — inverter surge compatibility, cable sizing, earthing, shading and
    local standards are explicitly out of scope and flagged in the UI and in every report.
 7. **SQLite concurrency** — adequate for a demo/single-server deployment; a production deployment
-   would move to PostgreSQL and a WSGI/ASGI server.
+   with concurrent writers would move to PostgreSQL.
 8. **Inference traces** are capped at the 50 most recent runs in the viewer endpoint.
+9. **Free-tier hosting sleeps** — the deployed demo runs on Render's free plan, which suspends
+   idle instances after ~15 minutes; the first request afterwards takes ~50 seconds to wake.
+   Documented in DEPLOY.md with the always-on alternatives.
+
+## Deployment
+
+The app ships as a **single deployable service**: `build.sh` compiles the React app into
+`frontend/dist` and Flask serves it alongside the REST API, so there is no CORS configuration and
+no second service. `render.yaml` makes this a one-click Blueprint deploy on Render, with the
+SQLite file on a mounted persistent disk and `SOLAR_SECRET` generated automatically.
+A GitHub Actions workflow (`.github/workflows/ci.yml`) runs the 39 tests and builds the frontend
+on every push to `main`. See [DEPLOY.md](../DEPLOY.md).
 
 ## Verification performed
 

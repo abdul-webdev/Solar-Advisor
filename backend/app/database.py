@@ -4,7 +4,12 @@ import sqlite3
 from datetime import datetime, timezone
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# SOLAR_DB_PATH lets a deployment point the database at a mounted disk
+# (e.g. Render's /var/data). Defaults to the backend folder for local use.
 DB_PATH = os.environ.get("SOLAR_DB_PATH", os.path.join(BASE_DIR, "solar_advisor.db"))
+_db_dir = os.path.dirname(os.path.abspath(DB_PATH))
+if _db_dir and not os.path.isdir(_db_dir):
+    os.makedirs(_db_dir, exist_ok=True)
 
 SCHEMA = """
 PRAGMA foreign_keys = ON;
