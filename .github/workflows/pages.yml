@@ -18,6 +18,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Always builds, tests and uploads the artifact. This job cannot fail for
+  # permission reasons, so the pipeline stays green even before Pages is enabled.
   build:
     runs-on: ubuntu-latest
     steps:
@@ -41,16 +43,24 @@ jobs:
         working-directory: demo
         run: npm run build
 
-      # enablement: true turns Pages on via the workflow token when the
-      # repository has not enabled it yet, so no manual settings change is needed.
-      - uses: actions/configure-pages@v5
+      - name: Package artifact
+        run: |
+          cd demo/dist
+          tar -czf ../../solar-advisor-demo.tar.gz .
+          echo "Packaged $(du -h ../../solar-advisor-demo.tar.gz | cut -f1) artifact"
+
+      - uses: actions/upload-artifact@v4
         with:
-          enablement: true
+          name: solar-advisor-demo
+          path: solar-advisor-demo.tar.gz
+          retention-days: 30
 
       - uses: actions/upload-pages-artifact@v3
         with:
           path: demo/dist
 
+  # Only runs once Pages is enabled on the repository (Settings → Pages →
+  # Source: GitHub Actions). Until then it is skipped rather than failing.
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -58,5 +68,17 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/configure-pages@v5
+        id: pages
+        continue-on-error: true
+
+      - name: Report Pages status
+        run: |
+          if [ "${{ steps.pages.outputs.base_url }}" = "" ]; then
+            echo "::notice title=Pages not enabled::Enable Settings → Pages → Source: GitHub Actions to publish. The built site is in the 'solar-advisor-demo' artifact."
+          else
+            echo "Pages site: ${{ steps.pages.outputs.base_url }}"
+          fi
+
+      - uses: actions/deploy-pages@v4
+        if: steps.pages.outputs.base_url != ''
