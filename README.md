@@ -54,6 +54,12 @@ npm run dev
 Open **http://localhost:5173**. Vite proxies `/api/*` to `http://localhost:5000`, so no extra
 configuration or CORS setup is needed for local development.
 
+> **Note on the dev proxy:** the Vite dev server keeps the session token it receives at login and
+> re-attaches it to every `/api` request. This exists because embedded/preview iframes can block
+> Web Storage and drop cookies, which otherwise causes "Authentication required" right after a
+> successful sign-in. It is development-only tooling: in production, serve the SPA behind your own
+> reverse proxy and rely on the `Authorization` header or the `sa_token` session cookie.
+
 ### Quick start (macOS / Linux)
 
 ```bash

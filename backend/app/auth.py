@@ -47,6 +47,8 @@ def request_token():
         token = (request.headers.get("X-Auth-Token") or "").strip()
     if not token:
         token = (request.cookies.get(TOKEN_COOKIE) or "").strip()
+    if not token:
+        token = (request.args.get("access_token") or "").strip()
     return token
 
 

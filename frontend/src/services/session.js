@@ -11,6 +11,12 @@ const KEY = 'sa_token';
 
 let memoryToken = null;
 
+// Cleared on logout so a stale query token cannot outlive the session.
+let urlToken = null;
+
+export function setUrlToken(token) { urlToken = token || null; }
+export function getUrlToken() { return urlToken; }
+
 function safeGet(store) {
   try { return store.getItem(KEY); } catch { return null; }
 }

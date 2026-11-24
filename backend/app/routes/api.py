@@ -8,7 +8,7 @@ from flask import Blueprint, g, jsonify, request
 from werkzeug.security import generate_password_hash
 
 from app.auth import (TOKEN_COOKIE, check_credentials, current_user, make_token,
-                      require_admin, require_auth)
+                      request_token, require_admin, require_auth, verify_token)
 from app.database import get_db, get_settings, set_setting
 from app.expert_system import calculations, explanation, inference_engine, knowledge_base, nlp
 
@@ -19,11 +19,17 @@ def _row_to_dict(row):
     return dict(row) if row else None
 
 
-def _auth_response(user, status=200):
-    """Issue a token in the body AND as an HttpOnly-free session cookie.
+TOKEN_PARAM = "access_token"
 
-    The cookie is the fallback path for embedded/proxied environments that drop
-    custom headers; the body token is what the SPA normally uses.
+
+def _auth_response(user, status=200):
+    """Issue the session token three independent ways.
+
+    1. JSON body   - what the SPA normally stores and sends back.
+    2. Cookie      - used when a proxy strips custom headers.
+    3. URL token   - appended to every `/api` request by Vite's dev proxy, which
+                     guarantees the token survives ANY host/header/cookie
+                     stripping (preview iframes routinely break 1 and 2).
     """
     token = make_token(user)
     resp = jsonify({"token": token, "user": _public_user(user)})
@@ -81,6 +87,20 @@ def login():
     conn.commit()
     conn.close()
     return _auth_response(user)
+
+
+@bp.get("/auth/token")
+def handshake():
+    """Return a freshly signed token for a cookie/bearer-authenticated request.
+
+    The frontend calls this after login to exchange the issued session for a
+    token it can attach to the URL fallback channel.
+    """
+    token = request_token()
+    payload = verify_token(token) if token else None
+    if not payload:
+        return jsonify({"error": "Authentication required."}), 401
+    return jsonify({"token": token})
 
 
 @bp.post("/auth/logout")
