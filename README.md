@@ -1,11 +1,30 @@
 # Solar Microgrid & Home Inverter Sizing Advisor
 
+<!-- LIVE_LINK_BADGE -->
+[![Live demo](https://img.shields.io/badge/live%20demo-open%20app-2563EB?style=for-the-badge)](https://solar-advisor-demo.onrender.com)
+[![CI](https://github.com/abdul-webdev/Solar-Advisor/actions/workflows/ci.yml/badge.svg)](https://github.com/abdul-webdev/Solar-Advisor/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/tests-39%20passing-16A34A)](#tests)
+
 A conversational, **rule-based expert system** that sizes a solar panel array, inverter and battery bank
 from a household's electricity needs described in plain language — and explains every number it produces.
 
 Built with **React + Vite + Tailwind CSS + Lucide + Recharts** on the front end and
 **Python Flask + Flask-CORS + SQLite** on the back end. All engineering logic runs on the server;
 the front end never calculates or hardcodes a recommendation.
+
+---
+
+## Live demo
+
+> **→ [Open the deployed application](https://solar-advisor-demo.onrender.com)**
+
+Hosted on Render's free tier. Free instances sleep after ~15 minutes of inactivity, so the first
+visit can take ~50 seconds to wake — reload once if it looks slow. Sign in with either demo account
+below.
+
+Deploying your own copy takes one click: see **[DEPLOY.md](DEPLOY.md)**. The whole app ships as a
+single service (Flask serves both the API and the built React frontend), configured by
+[`render.yaml`](render.yaml).
 
 ---
 
