@@ -454,11 +454,30 @@ def list_equipment():
 @bp.get("/rules")
 @require_auth
 def list_rules():
-    return jsonify({"rules": knowledge_base.get_rules()})
+    rules = knowledge_base.get_rules()
+    if g.user["role"] != "admin":
+        # General users may inspect the active rule set (transparency), but
+        # inactive/draft rules under review are not part of the published system.
+        rules = [r for r in rules if r.get("is_active")]
+    return jsonify({"rules": rules})
+
+
+# Engineering defaults are administrator configuration. General users only get
+# the published assumptions needed to label their own report.
+PUBLIC_SETTING_KEYS = ("peak_sun_hours", "pv_performance_ratio", "battery_dod",
+                       "inverter_efficiency", "inverter_safety_margin",
+                       "solar_array_reserve", "knowledge_version", "rules_version")
+
+
+@bp.get("/settings/public")
+@require_auth
+def get_public_settings():
+    all_settings = get_settings()
+    return jsonify({"settings": {k: all_settings[k] for k in PUBLIC_SETTING_KEYS if k in all_settings}})
 
 
 @bp.get("/settings")
-@require_auth
+@require_admin
 def get_settings_api():
     return jsonify({"settings": get_settings()})
 

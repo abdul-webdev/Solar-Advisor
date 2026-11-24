@@ -22,7 +22,9 @@
 | Recommendation dashboard (cards, chart, table) | ✅ | `pages/Recommendations.jsx` (Recharts bar chart + appliance table) |
 | Save / view / delete recommendations | ✅ | `/api/recommendations*`, scoped per user |
 | Knowledge base CRUD (admin) | ✅ | `pages/admin/AdminKnowledge.jsx` |
-| Knowledge base read-only browsing (user) | ✅ | `pages/UserPages.jsx` → `KnowledgeBase` |
+| Knowledge base read-only browsing (user) | ✅ | `pages/UserPages.jsx` → `KnowledgeBase` (published facts only; role banner explains the limit) |
+| Admin configuration not exposed to users | ✅ | `GET /api/settings` admin-only; `GET /api/settings/public` returns just the published assumptions |
+| Active-only rule set for users | ✅ | `/api/rules` filters out inactive/draft rules for non-admins |
 | Admin dashboard with statistics | ✅ | `pages/admin/AdminDashboard.jsx` |
 | Rule management + rule testing | ✅ | `AdminRules.jsx`, `AdminTestRules.jsx` |
 | Equipment management (panels, inverters, batteries) | ✅ | `AdminEquipment.jsx` |
@@ -61,7 +63,19 @@
 
 ## Verification performed
 
-- `python -m pytest tests -q` → **27 passed**.
+- `python -m pytest tests -q` → **39 passed**.
+
+### RBAC audit (`tests/test_rbac_exhaustive.py`)
+
+Instead of spot-checking, this test walks Flask's URL map and calls **every**
+`/api/admin/*` route × method as a general user and as an anonymous caller; any
+route answering anything other than 401/403 fails the build. It also verifies:
+
+- draft knowledge facts never appear in a general user's listing;
+- a user cannot PATCH or DELETE a fact, rule, appliance or equipment record;
+- a user cannot read or delete another user's recommendation (404, not 403-leak);
+- an administrator cannot change their own role or delete their own account;
+- `/api/settings` is admin-only while `/api/settings/public` serves the labelled assumptions.
 - Live end-to-end check against the running servers: login → chat (example sentence) → 2,112 W
   connected load, 3 kW inverter, 6 × 550 W = 3.3 kWp array, 51.2 V / 150 Ah battery giving
   ~8.2 h backup → report retrievable → admin sandbox run → trace recorded.

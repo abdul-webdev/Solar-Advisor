@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
-import { BookOpen, Search, ArrowRight, Send, CheckCircle2 } from 'lucide-react';
+import { BookOpen, Search, ArrowRight, Send, CheckCircle2, Lock } from 'lucide-react';
 import { get, post, patch } from '../services/api';
 import { useAuth } from '../hooks/useAuth';
 import { Badge, EmptyState, ErrorBanner, InfoModal, inputCls, btnPrimary } from '../components/ui';
@@ -31,7 +31,19 @@ export function KnowledgeBase() {
   return (
     <div>
       <h1 className="text-2xl font-bold text-navy sm:text-[28px]">Knowledge Base</h1>
-      <p className="mt-1 text-[15px] text-muted">Approved expert knowledge that powers the advisor. Read-only for general users.</p>
+      <p className="mt-1 text-[15px] text-muted">Approved expert knowledge that powers the advisor.</p>
+
+      <div className="mt-4 flex items-start gap-3 rounded-xl border border-line bg-white px-4 py-3">
+        <Lock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+        <div>
+          <p className="text-sm font-semibold text-navy">Read-only view · General user access</p>
+          <p className="mt-0.5 text-[13px] text-muted">
+            You are browsing <span className="font-medium text-navy">published</span> facts only. Creating, editing and deleting
+            knowledge requires the Administrator / Solar expert role, and those requests are refused by the server — not just hidden in the interface.
+          </p>
+        </div>
+      </div>
+
       <ErrorBanner message={error} />
       <div className="mt-6 flex flex-wrap gap-3">
         <div className="relative min-w-[240px] flex-1">

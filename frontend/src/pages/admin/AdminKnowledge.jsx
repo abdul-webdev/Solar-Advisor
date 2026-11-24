@@ -68,7 +68,10 @@ export default function AdminKnowledge() {
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-navy sm:text-[28px]">Knowledge management</h1>
-          <p className="mt-1 text-[15px] text-muted">Approved engineering facts and appliance wattage references used by the expert system.</p>
+          <p className="mt-1 text-[15px] text-muted">
+            Approved engineering facts and appliance wattage references used by the expert system.
+            <span className="ml-1 font-medium text-primary">Administrator access: full create, edit and delete.</span>
+          </p>
         </div>
         <button onClick={tab === 'facts' ? openNew : () => setApForm({ name: '', category: 'general', wattage_w: 100, typical_hours_per_day: 4, is_essential: 1, description: '' })} className={btnPrimary}>
           <Plus className="h-4 w-4" /> {tab === 'facts' ? 'Add knowledge fact' : 'Add appliance'}
