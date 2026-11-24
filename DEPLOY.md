@@ -14,7 +14,8 @@ Everything is pre-configured — you only need a hosting account.
 3. Select the `Solar-Advisor` repository. Render reads `render.yaml` automatically.
 4. Click **Apply**. The build takes ~3–5 minutes.
 
-Your app will be live at `https://solar-advisor-xxxx.onrender.com`.
+Render assigns your service a URL such as `https://<your-service-name>.onrender.com` and shows
+it in the dashboard once the deploy finishes.
 
 **What `render.yaml` does**
 
@@ -55,16 +56,20 @@ Set these environment variables in your host's dashboard:
 
 ---
 
-## Option C — a quick local demo over the network
+## Option C — demoing without any hosting account
+
+If you cannot create a hosting account before a deadline, present the app running locally. It
+needs **one** process, not two:
 
 ```bash
-cd frontend && npm run build          # produce frontend/dist
-cd ../backend
-python run.py                          # open http://localhost:5000
+cd frontend && npm install && npm run build && cd ..
+pip install -r backend/requirements.txt
+cd backend && python run.py
 ```
 
-Flask serves the built app at `/` once `frontend/dist` exists, so you get the whole product from
-one process — no Vite dev server needed.
+Flask serves the complete product — interface and API — from a single port, so there is nothing
+else to start and nothing that can drift out of sync. This is the same command the README's
+"Run it" section uses.
 
 ---
 

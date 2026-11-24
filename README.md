@@ -1,9 +1,9 @@
 # Solar Microgrid & Home Inverter Sizing Advisor
 
-<!-- LIVE_LINK_BADGE -->
-[![Live demo](https://img.shields.io/badge/live%20demo-open%20app-2563EB?style=for-the-badge)](https://solar-advisor-demo.onrender.com)
 [![CI](https://github.com/abdul-webdev/Solar-Advisor/actions/workflows/ci.yml/badge.svg)](https://github.com/abdul-webdev/Solar-Advisor/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/tests-39%20passing-16A34A)](#tests)
+[![Python](https://img.shields.io/badge/python-3.10%2B-3776AB)](https://python.org)
+[![React](https://img.shields.io/badge/react-18-61DAFB)](https://react.dev)
 
 A conversational, **rule-based expert system** that sizes a solar panel array, inverter and battery bank
 from a household's electricity needs described in plain language — and explains every number it produces.
@@ -14,17 +14,35 @@ the front end never calculates or hardcodes a recommendation.
 
 ---
 
-## Live demo
+## Run it
 
-> **→ [Open the deployed application](https://solar-advisor-demo.onrender.com)**
+Two commands, no configuration:
 
-Hosted on Render's free tier. Free instances sleep after ~15 minutes of inactivity, so the first
-visit can take ~50 seconds to wake — reload once if it looks slow. Sign in with either demo account
-below.
+```bash
+# 1. build the frontend and install everything
+cd frontend && npm install && npm run build && cd ..
+pip install -r backend/requirements.txt
 
-Deploying your own copy takes one click: see **[DEPLOY.md](DEPLOY.md)**. The whole app ships as a
-single service (Flask serves both the API and the built React frontend), configured by
-[`render.yaml`](render.yaml).
+# 2. start the whole app (Flask serves the API *and* the built interface)
+cd backend && python run.py
+```
+
+Then open **http://localhost:5000** — that single port serves the entire application.
+The database is created and seeded automatically on first start.
+
+For day-to-day development with hot reload, run the Vite dev server instead (see
+[Development](#development-windows--macos--linux)).
+
+### Deploying it
+
+The project ships ready to deploy as **one web service** — Flask serves both the API and the built
+interface. `render.yaml` configures a free Render Blueprint and `build.sh` produces the production
+bundle. Full instructions, environment variables and troubleshooting:
+**[DEPLOY.md](DEPLOY.md)**.
+
+A live demo URL is not published here because it would go stale: free hosting tiers suspend idle
+instances. The deploy takes about three minutes, and the section above runs the identical build
+locally in two commands.
 
 ---
 
@@ -39,11 +57,13 @@ These are created automatically the first time the app initialises an empty data
 
 ---
 
-## Quick start (Windows)
+## Development (Windows · macOS · Linux)
 
 Requirements: **Python 3.10+** and **Node.js 18+** (tested on Python 3.11 / Node 22).
 
-### 1. Backend (terminal 1)
+Use this mode while editing code — Vite rebuilds on save.
+
+**Terminal 1 — API**
 
 ```bat
 cd backend
@@ -53,16 +73,18 @@ pip install -r requirements.txt
 python run.py
 ```
 
-The API runs at **http://localhost:5000**. On first start it creates `backend\solar_advisor.db`
-and seeds demo users, 20 appliances, 12 knowledge facts, 11 expert rules and 18 equipment records.
+On macOS/Linux the second and third lines become `python3 -m venv venv` and `source venv/bin/activate`.
 
-Optional — verify the install with the test suite (27 tests):
+The API listens on port 5000 and, on first start, creates `backend/solar_advisor.db`, seeding the
+demo users, 20 appliances, 12 knowledge facts, 11 expert rules and 18 equipment records.
+
+Verify the install with the test suite (39 tests):
 
 ```bat
 python -m pytest tests -q
 ```
 
-### 2. Frontend (terminal 2)
+**Terminal 2 — interface with hot reload**
 
 ```bat
 cd frontend
@@ -70,30 +92,12 @@ npm install
 npm run dev
 ```
 
-Open **http://localhost:5173**. Vite proxies `/api/*` to `http://localhost:5000`, so no extra
-configuration or CORS setup is needed for local development.
+The dev server prints the URL to open (port 5173 by default) and proxies `/api/*` to the Flask
+server, so there is no CORS setup.
 
-> **Note on the dev proxy:** the Vite dev server keeps the session token it receives at login and
-> re-attaches it to every `/api` request. This exists because embedded/preview iframes can block
-> Web Storage and drop cookies, which otherwise causes "Authentication required" right after a
-> successful sign-in. It is development-only tooling: in production, serve the SPA behind your own
-> reverse proxy and rely on the `Authorization` header or the `sa_token` session cookie.
-
-### Quick start (macOS / Linux)
-
-```bash
-cd backend && python3 -m venv venv && source venv/bin/activate \
-  && pip install -r requirements.txt && python run.py
-
-# second terminal
-cd frontend && npm install && npm run dev
-```
-
-### Production build (optional)
-
-```bash
-cd frontend && npm run build      # outputs frontend/dist
-```
+> The dev proxy also carries the session token server-side. This is development-only tooling for
+> embedded preview environments that block Web Storage or strip cookies; a normal browser session
+> works through the `Authorization` header and the `sa_token` cookie.
 
 ---
 
@@ -218,11 +222,12 @@ cd backend
 python -m pytest tests -q
 ```
 
-27 tests across `test_calculations.py`, `test_nlp.py`, `test_rules.py`, `test_api.py`,
+39 tests across `test_calculations.py`, `test_nlp.py`, `test_rules.py`, `test_api.py`,
 `test_recommendation.py` and `test_workflow.py` cover: engineering formulas and division-by-zero
 guards, requirement extraction (including word-number quantities and missing-data cases),
-rule evaluation and priorities, clarification handling, authentication, RBAC (403 for general
-users), recommendation generation/persistence, and the **complete end-to-end workflow**.
+rule evaluation and priorities, clarification handling, authentication and session handling,
+an exhaustive RBAC audit that walks Flask's URL map, recommendation generation/persistence, and
+the **complete end-to-end workflow**.
 
 ---
 
