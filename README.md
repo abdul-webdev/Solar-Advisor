@@ -14,6 +14,27 @@ the front end never calculates or hardcodes a recommendation.
 
 ---
 
+## Live demo
+
+The full expert system also runs **without a server**, in your browser, on GitHub Pages:
+
+> **→ https://abdul-webdev.github.io/Solar-Advisor/**
+
+It is a port of the same engine — same formulas, same 11 database rules, same explanation text —
+with parity enforced by tests in CI (see [`demo/`](demo/README.md)). Accounts and admin tools need
+a server, so those live in the full-stack version below.
+
+**If the link is not live yet**, GitHub Pages has not been switched on: go to
+**Settings → Pages → Source: GitHub Actions** (one click, no card). The workflow then publishes the
+site automatically.
+
+**Want the full application — login, both roles, admin console — live as well?**
+The repository includes a dev container, so **Code → Codespaces → Create codespace on main** starts
+the complete Flask + SQLite app by itself, with no card and no terminal setup. Open port 5000 when
+it finishes. Full instructions for every hosting route: **[DEPLOY.md](DEPLOY.md)**.
+
+---
+
 ## Run it
 
 Two commands, no configuration:
@@ -36,13 +57,11 @@ For day-to-day development with hot reload, run the Vite dev server instead (see
 ### Deploying it
 
 The project ships ready to deploy as **one web service** — Flask serves both the API and the built
-interface. `render.yaml` configures a free Render Blueprint and `build.sh` produces the production
-bundle. Full instructions, environment variables and troubleshooting:
-**[DEPLOY.md](DEPLOY.md)**.
+interface. `build.sh` produces the production bundle and `backend/wsgi.py` is the entry point.
 
-A live demo URL is not published here because it would go stale: free hosting tiers suspend idle
-instances. The deploy takes about three minutes, and the section above runs the identical build
-locally in two commands.
+No-card options (GitHub Codespaces, PythonAnywhere, any VPS) are documented in
+**[DEPLOY.md](DEPLOY.md)**. Render is included as an alternative via `render.yaml`, but note that
+Render's free tier now requires a payment method at sign-up.
 
 ---
 

@@ -60,11 +60,17 @@
 7. **SQLite concurrency** — adequate for a demo/single-server deployment; a production deployment
    with concurrent writers would move to PostgreSQL.
 8. **Inference traces** are capped at the 50 most recent runs in the viewer endpoint.
-9. **Free-tier hosting sleeps** — the deployed demo runs on Render's free plan, which suspends
-   idle instances after ~15 minutes; the first request afterwards takes ~50 seconds to wake.
-   Documented in DEPLOY.md with the always-on alternatives.
+9. **Static demo scope** — the GitHub Pages build runs the full expert system in the browser but
+   has no accounts, saved history or admin CRUD, since those require a server. The complete
+   implementation is in the repository and runs via Codespaces, PythonAnywhere, or any VPS
+   (see DEPLOY.md).
 
 ## Deployment
+
+**No card is required for either route.** GitHub Pages serves a browser port of the expert system
+(parity tested against the Python engine), and a dev container lets GitHub Codespaces run the full
+Flask + SQLite application with one click. Render is available via `render.yaml` but its free tier
+now asks for a payment method, so it is documented as an alternative rather than the default.
 
 The app ships as a **single deployable service**: `build.sh` compiles the React app into
 `frontend/dist` and Flask serves it alongside the REST API, so there is no CORS configuration and
